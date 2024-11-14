@@ -21,18 +21,23 @@ public class ComponentFactory {
     private final BookController bookController;
     private final BookRepository bookRepository;
     private final BookService bookService;
-    private static ComponentFactory instance;
+    private static volatile ComponentFactory instance;
     public static ComponentFactory getInstance(Boolean componentsForTest, Stage primaryStage){
         //TO DO
-        //sa fie safe-thread + lazy -> modificari la metode accesibilitate , variabile volatile , syncronize, ...
+        //sa fie thread-safe + lazy -> variabile volatile , syncronize, ...
         if(instance == null){
-            instance= new ComponentFactory(componentsForTest, primaryStage);
-
+            {
+                synchronized (ComponentFactory.class){
+                    if(instance == null){
+                        instance= new ComponentFactory(componentsForTest, primaryStage);
+                    }
+                }
+            }
         }
         return instance;
     }
     //contructor - ar putea cauza o problema fiindca e public
-    public ComponentFactory(Boolean componentsFortest, Stage primaryStage){
+    private ComponentFactory(Boolean componentsFortest, Stage primaryStage){
         Connection connection= DatabaseConnectionFactory.getConnectionWrapper(componentsFortest).getConnection();
         this.bookRepository = new BookRepositoryMySQL(connection);
         this.bookService = new BookServiceImpl(bookRepository);

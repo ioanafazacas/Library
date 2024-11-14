@@ -22,7 +22,7 @@ public class BookRepositoryMySQL implements BookRepository{
 
        try {
            PreparedStatement statement = connection.prepareStatement(sql);
-           ResultSet resultSet = statement.executeQuery(sql);
+           ResultSet resultSet = statement.executeQuery();
 
            while(resultSet.next()){
                books.add(getBookFromResultSet(resultSet));
@@ -40,7 +40,7 @@ public class BookRepositoryMySQL implements BookRepository{
        try{
            PreparedStatement statement = connection.prepareStatement(sql);
            statement.setLong(1,id);
-           ResultSet resultSet= statement.executeQuery(sql);
+           ResultSet resultSet= statement.executeQuery();
 
            if(resultSet.next()){
                book = Optional.of(getBookFromResultSet(resultSet));
@@ -58,8 +58,8 @@ public class BookRepositoryMySQL implements BookRepository{
            PreparedStatement statement = connection.prepareStatement(newSql);
            statement.setString(1, book.getAutor());
            statement.setString(2,book.getTitle());
-           statement.setDate(2, Date.valueOf(book.getPublichedDate()));
-           statement.executeUpdate(newSql);
+           statement.setDate(3, Date.valueOf(book.getPublichedDate()));
+           statement.executeUpdate();
        }catch (SQLException e){
            e.printStackTrace();
            return false;
@@ -75,7 +75,7 @@ public class BookRepositoryMySQL implements BookRepository{
            PreparedStatement statement = connection.prepareStatement(sql);
            statement.setString(1, book.getAutor());
            statement.setString(2, book.getTitle());
-            statement.executeUpdate(sql);
+            statement.executeUpdate();
        }catch (SQLException e){
            e.printStackTrace();
            return false;
@@ -88,7 +88,7 @@ public class BookRepositoryMySQL implements BookRepository{
         String sql= "TRUNCATE TABLE book;";
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.executeUpdate(sql);
+            statement.executeUpdate();
         }catch (SQLException e){
             e.printStackTrace();
         }

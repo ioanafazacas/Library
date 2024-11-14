@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface BookRepository {
     List<Book> findAll();
-    Optional<Book> findById(Long id);//optional ne ajuta sa scapam de null (ca rezultat de return)
+    Optional<Book> findById(Long id);//Optional<> ne ajuta sa scapam de null (ca rezultat de return)
     boolean save(Book book);
     boolean delete(Book book);
     void removeAll();
