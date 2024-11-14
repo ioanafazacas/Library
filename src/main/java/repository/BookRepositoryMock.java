@@ -19,7 +19,7 @@ public class BookRepositoryMock implements BookRepository{
     }
 
     @Override
-    public Optional<Book> dinfById(Long id) {
+    public Optional<Book> findById(Long id) {
         return books.parallelStream()
                 .filter(it -> it.getId().equals(id))
                 .findFirst();

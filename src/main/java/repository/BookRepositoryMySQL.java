@@ -33,27 +33,66 @@ public class BookRepositoryMySQL implements BookRepository{
        }catch (SQLException e){
            e.printStackTrace();
        }
-        return null;
+        return books;
     }
 
     @Override
-    public Optional<Book> dinfById(Long id) {
-        return Optional.empty();
+    public Optional<Book> findById(Long id) {
+       String  sql = "SELECT * FROM book WHERE id=" + id;
+       Optional<Book> book = Optional.empty();
+       try{
+           Statement statement= connection.createStatement();
+           ResultSet resultSet= statement.executeQuery(sql);
+
+           if(resultSet.next()){
+               book = Optional.of(getBookFromResultSet(resultSet));
+           }
+       }catch (SQLException e){
+           e.printStackTrace();
+       }
+       return book;
     }
 
     @Override
     public boolean save(Book book) {
-        return false;
+       String  newSql= "INSERT INTO book VALUES(null, \'"+
+               book.getAutor()+ "\', \'"+ book.getTitle()+
+               "\', \'" + book.getPublichedDate() + "\');";
+       try{
+           Statement statement= connection.createStatement();
+           statement.executeUpdate(newSql);
+       }catch (SQLException e){
+           e.printStackTrace();
+           return false;
+       }
+
+       return true;
     }
 
     @Override
     public boolean delete(Book book) {
-        return false;
+       String sql = "DELETE FROM book WHERE author=\'"+
+               book.getAutor() + "\' AND title=\'"+ book.getTitle()
+               + "\';";
+       try{
+            Statement statement= connection.createStatement();
+            statement.executeUpdate(sql);
+       }catch (SQLException e){
+           e.printStackTrace();
+           return false;
+       }
+       return true;
     }
 
     @Override
     public void removeAll() {
-
+        String sql= "TRUNCATE TABLE book;";
+        try{
+            Statement statement= connection.createStatement();
+            statement.executeUpdate(sql);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
     private Book getBookFromResultSet (ResultSet resultSet) throws SQLException {
        return new BookBuilder()
