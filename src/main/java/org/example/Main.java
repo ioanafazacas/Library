@@ -2,13 +2,14 @@ package org.example;
 
 
 import builder.BookBuilder;
+import builder.OrderBuilder;
 import database.DatabaseConnectionFactory;
 import model.Book;
-import repository.BookRepository;
-import repository.BookRepositoryMock;
-import repository.BookRepositoryMySQL;
+import repository.*;
 import service.BookService;
 import service.BookServiceImpl;
+import service.OrderService;
+import service.OrderServiceImpl;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -37,7 +38,7 @@ public class Main {
 
          */
         //DatabaseConnectionFactory.getConnectionWrapper(false);
-        Connection connection= DatabaseConnectionFactory.getConnectionWrapper(false).getConnection();
+        /*Connection connection= DatabaseConnectionFactory.getConnectionWrapper(false).getConnection();
         BookRepository bookRepository= new BookRepositoryMySQL(connection);
         BookService bookService= new BookServiceImpl(bookRepository);
 
@@ -49,6 +50,16 @@ public class Main {
         bookService.delete(bookHarapAlb);
         bookService.delete(book);
         System.out.println(bookService.findAll());
+        */
+
+
+        Connection connection= DatabaseConnectionFactory.getConnectionWrapper(false).getConnection();
+        OrderRepository orderRepository= new OrderRepositoryMySQL(connection);
+        OrderService orderService= new OrderServiceImpl(orderRepository);
+
+        System.out.println(orderService.findAll());
+        orderService.save(new OrderBuilder().setTitle("George Bacovia").setTitle("Plumb").setprice(20).setQuantity(2).build());
+        System.out.println(orderService.findAll());
 
 
     }

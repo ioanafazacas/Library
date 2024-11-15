@@ -2,7 +2,8 @@ package model;
 
 import java.time.LocalDate;
 
-public class Book {
+public class Book {//trebuie facute modificari , adaugate campurile quantity si price
+                    //de asemenea trebuie sa refac tabelul book din mysql
     private Long id;
     private String title;
     private String autor;

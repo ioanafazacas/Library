@@ -38,6 +38,18 @@ public class JDBConnectionWrapper {
                 " UNIQUE KEY id_UNIQUE(id)"+
                 ") ENGINE= InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8; ";
         statement.execute(sql);
+
+        String sql2 = "CREATE TABLE IF NOT EXISTS book_order("+
+                " id bigint NOT NULL AUTO_INCREMENT,"+
+                " author VARCHAR(500) NOT NULL,"+
+                " title VARCHAR(500) NOT NULL," +
+                " saleDate datetime DEFAULT NULL,"+
+                " quantity int DEFAULT 0,"+
+                " price float DEFAULT 0,"+
+                " PRIMARY KEY(id), "+
+                " UNIQUE KEY id_UNIQUE(id)"+
+                ") ENGINE= InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8; ";
+        statement.execute(sql2);
     }
 
     public boolean testConnecion() throws SQLException{
