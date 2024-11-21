@@ -1,7 +1,7 @@
 package mapper;
 
 
-import builder.OrderBuilder;
+import model.builder.OrderBuilder;
 
 import model.Order;
 

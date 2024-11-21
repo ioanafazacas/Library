@@ -1,6 +1,5 @@
 package view.model.builder;
 
-import builder.BookBuilder;
 import view.model.BookDTO;
 
 public class BookDTOBuilder {

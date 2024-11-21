@@ -1,10 +1,9 @@
-import builder.BookBuilder;
+import model.builder.BookBuilder;
 import model.Book;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import repository.BookRepository;
-import repository.BookRepositoryMock;
+import repository.book.BookRepository;
+import repository.book.BookRepositoryMock;
 
 import java.time.LocalDate;
 import java.util.List;

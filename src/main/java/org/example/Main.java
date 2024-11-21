@@ -1,13 +1,11 @@
 package org.example;
 
 
-import builder.BookBuilder;
-import builder.OrderBuilder;
+import model.builder.BookBuilder;
+import model.builder.OrderBuilder;
 import database.DatabaseConnectionFactory;
 import model.Book;
 import repository.*;
-import service.BookService;
-import service.BookServiceImpl;
 import service.OrderService;
 import service.OrderServiceImpl;
 

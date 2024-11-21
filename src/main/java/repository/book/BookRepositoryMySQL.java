@@ -1,6 +1,6 @@
-package repository;
+package repository.book;
 
-import builder.BookBuilder;
+import model.builder.BookBuilder;
 import model.Book;
 
 import java.sql.*;
