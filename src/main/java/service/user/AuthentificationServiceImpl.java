@@ -25,14 +25,15 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     @Override
     public boolean register(String username, String password) {
 
+        String encodedPassword = hashPassword(password);
         Role customerRole = rightsRolesRepository.findRoleByTitle(CUSTOMER);
 
         User user = new UserBuilder()
                 .setUsername(username)
-                .setPassword(password)
+                .setPassword(encodedPassword)
                 .setRoles(Collections.singletonList(customerRole))
                 .build();
-
+/*
         UserValidator userValidator = new UserValidator(user);
 
         boolean userValid = userValidator.validate();
@@ -45,8 +46,8 @@ public class AuthentificationServiceImpl implements AuthentificationService{
             user.setPassword(hashPassword(password));
             userRegisterNotification.setResult(userRepository.save(user));
         }
-
-        return userRegisterNotification;
+*/
+        return userRepository.save(user);
     }
 
     @Override

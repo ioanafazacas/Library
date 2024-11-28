@@ -26,5 +26,5 @@ public class Main {
     UserRepository userRepository = new UserRepositoryMySQL(connection, rightsRolesRepository);
     AuthentificationService authentificationService= new AuthentificationServiceImpl(userRepository, rightsRolesRepository);
 
-    authentificationService.
+
 }
