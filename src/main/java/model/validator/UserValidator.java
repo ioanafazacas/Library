@@ -7,42 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 public class UserValidator {
     private static final String EMAIL_VALIDATION_REGEX = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
     public static final int MIN_PASSWORD_LENGTH = 8;
     private final List<String> errors;
-    private final UserRepository userRepository;
+    private final User user;
 
-    public UserValidator(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserValidator(User user) {
+        this.user = user;
         this.errors = new ArrayList<>();
     }
 
-    public void validate(String username, String password) {
-        errors.clear();
-        validateEmailUniqueness(username);
-        validateEmail(username);
-        validatePasswordLength(password);
-        validatePasswordSpecial(password);
-        validatePasswordDigit(password);
+    public boolean validate() {
+        validateUsername(user.getUsername());
+        validatePassword(user.getPassword());
 
+        return errors.isEmpty();
     }
-    private void validateEmailUniqueness(String email){
-        final boolean response= userRepository.existsByUsername(email);
-        if(response){
-            errors.add("Email is already taken");
-        }
-    }
-    private void validateEmail(String email){
-        if(!email.matches(EMAIL_VALIDATION_REGEX)){
-            errors.add("Email is not valid");
-        }
-    }
-    private void validatePasswordLength(String password){
-        if(!password.matches())
-    }
-    validatePasswordSpecial(password);
-    validatePasswordDigit(password);
+
     private void validateUsername(String username){
         if (!Pattern.compile(EMAIL_VALIDATION_REGEX).matcher(username).matches()){
             errors.add("Email is not valid!");

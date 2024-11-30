@@ -23,6 +23,7 @@ import service.OrderService;
 import service.OrderServiceImpl;
 import service.user.AuthentificationService;
 import service.user.AuthentificationServiceImpl;
+import view.LoginView;
 
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -75,7 +76,7 @@ public class Main extends Application {
         System.out.println(orderService.findAll());
         orderService.save(new OrderBuilder().setTitle("George Bacovia").setTitle("Plumb").setprice(20).setQuantity(2).build());
         System.out.println(orderService.findAll());
-
+*/
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(true).getConnection();
         BookRepository bookRepository = new BookRepositoryCacheDecorator(new BookRepositoryMySQL(connection), new Cache<>());
         //Connection connection= DatabaseConnectionFactory.getConnectionWrapper(true).getConnection();
@@ -84,17 +85,17 @@ public class Main extends Application {
         UserRepository userRepository = new UserRepositoryMySQL(connection, rightsRolesRepository);
         AuthentificationService authentificationService= new AuthentificationServiceImpl(userRepository, rightsRolesRepository);
 
-        if(userRepository.existsByUsername("Amalia"))
+        if(userRepository.existsByUsername("Andrei"))
         {
             System.out.println("Avem deja acest utilizator");
         }else {
-            authentificationService.register("Amalia", "parola03");
+            authentificationService.register("Andrei", "parola04");
         }
         System.out.println("USER:");
 
-        System.out.println(authentificationService.login("Amalia","parola03"));
-*/
-        launch(args);
+        System.out.println(authentificationService.login("Andrei","parola04"));
+
+        //launch(args);
     }
 
     @Override
