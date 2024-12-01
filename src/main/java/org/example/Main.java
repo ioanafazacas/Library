@@ -76,7 +76,7 @@ public class Main extends Application {
         System.out.println(orderService.findAll());
         orderService.save(new OrderBuilder().setTitle("George Bacovia").setTitle("Plumb").setprice(20).setQuantity(2).build());
         System.out.println(orderService.findAll());
-*/
+
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(true).getConnection();
         BookRepository bookRepository = new BookRepositoryCacheDecorator(new BookRepositoryMySQL(connection), new Cache<>());
         //Connection connection= DatabaseConnectionFactory.getConnectionWrapper(true).getConnection();
@@ -94,8 +94,8 @@ public class Main extends Application {
         System.out.println("USER:");
 
         System.out.println(authentificationService.login("Andrei","parola04"));
-
-        //launch(args);
+*/
+        launch(args);
     }
 
     @Override
@@ -109,8 +109,6 @@ public class Main extends Application {
 
         final LoginView loginView = new LoginView(primaryStage);
 
-        final UserValidator userValidator = new UserValidator(userRepository);
-
-        new LoginController(loginView, authentificationService, userValidator);
+        new LoginController(loginView, authentificationService);
     }
 }

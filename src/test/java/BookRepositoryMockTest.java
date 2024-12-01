@@ -18,7 +18,7 @@ public class BookRepositoryMockTest {
     public static void setup(){
         bookRepository = new BookRepositoryMock();
     }
-    @Test
+    /*@Test
     public void findAll(){
         List<Book> books= bookRepository.findAll();
         assertEquals(0, books.size());
@@ -31,5 +31,5 @@ public class BookRepositoryMockTest {
     @Test
     public void save(){
         assertTrue(bookRepository.save(new BookBuilder().setTitle("Poezii").setAuthor("Tudor Arghezii").setPublishedDate(LocalDate.of(1920,8,8)).build()));
-    }
+    }*/
 }

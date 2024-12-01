@@ -3,6 +3,8 @@ import model.Role;
 import model.User;
 import model.builder.UserBuilder;
 
+import model.validator.Notification;
+import model.validator.UserValidator;
 import repository.security.RightsRolesRepository;
 import repository.user.UserRepository;
 
@@ -23,21 +25,23 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     }
 
     @Override
-    public boolean register(String username, String password) {
+    public Notification<Boolean> register(String username, String password) {
+
+        Role customerRole = rightsRolesRepository.findRoleByTitle(CUSTOMER);
 
         String encodedPassword = hashPassword(password);
-        Role customerRole = rightsRolesRepository.findRoleByTitle(CUSTOMER);
 
         User user = new UserBuilder()
                 .setUsername(username)
                 .setPassword(encodedPassword)
                 .setRoles(Collections.singletonList(customerRole))
                 .build();
-/*
+
+
         UserValidator userValidator = new UserValidator(user);
 
         boolean userValid = userValidator.validate();
-        boolean userRegisterNotification = new Notification<>();
+        Notification<Boolean> userRegisterNotification = new Notification<>();
 
         if (!userValid){
             userValidator.getErrors().forEach(userRegisterNotification::addError);
@@ -46,12 +50,12 @@ public class AuthentificationServiceImpl implements AuthentificationService{
             user.setPassword(hashPassword(password));
             userRegisterNotification.setResult(userRepository.save(user));
         }
-*/
-        return userRepository.save(user);
+
+        return userRegisterNotification;
     }
 
     @Override
-    public User login(String username, String password) {
+    public Notification<User> login(String username, String password) {
         return userRepository.findByUsernameAndPassword(username, hashPassword(password));
     }
 
