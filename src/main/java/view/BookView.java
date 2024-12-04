@@ -20,8 +20,12 @@ public class BookView {
     private final ObservableList<BookDTO> booksObservableList;
     private TextField authorTextField;
     private TextField titleTextField;
+    private TextField quantityTextField;
+    private TextField priceTextField;
     private Label authorLable;
     private Label titleLabel;
+    private Label quantityLable;
+    private Label priceLabel;
     private Button saveButton;
     private Button deleteButton;
     private Button buyButton;
@@ -54,11 +58,15 @@ public class BookView {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         TableColumn<BookDTO, String> authorColumn = new TableColumn<BookDTO, String>("Author");
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
+        TableColumn<BookDTO, String> priceColumn = new TableColumn<BookDTO, String>("Price");
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        TableColumn<BookDTO, String> quantityColumn = new TableColumn<BookDTO, String>("Quantity");
+        authorColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
-        bookTableView.getColumns().addAll(titleColumn,authorColumn);
+        bookTableView.getColumns().addAll(titleColumn,authorColumn,priceColumn,quantityColumn);
 
         bookTableView.setItems(booksObservableList);
-        gridPane.add(bookTableView,0,0,5,1);
+        gridPane.add(bookTableView,0,0,6,1);
     }
     private void initSaveOprions(GridPane gridPane){
         titleLabel= new Label("Title");
@@ -72,6 +80,18 @@ public class BookView {
 
         authorTextField = new TextField();
         gridPane.add(authorTextField,4,1);
+
+        quantityLable = new Label("Quantity");
+        gridPane.add(quantityLable,1,2);
+
+        quantityTextField = new TextField();
+        gridPane.add(quantityTextField,2,2);
+
+        priceLabel = new Label("Price");
+        gridPane.add(priceLabel,3,2);
+
+        priceTextField = new TextField();
+        gridPane.add(priceTextField,4,2);
 
         saveButton = new Button("Save");
         gridPane.add(saveButton,5,1);
@@ -105,6 +125,8 @@ public class BookView {
     public String getAuthor(){
         return authorTextField.getText();
     }
+    public int getQuantity(){return Integer.parseInt(quantityTextField.getText());}
+    public float getPrice(){return Float.parseFloat(priceTextField.getText());}
     public void addBookToObeservableList(BookDTO bookDTO){
         this.booksObservableList.add(bookDTO); //adaugam element la ObservableList-ul curent si
                                                 // nu ii schimbam referinta

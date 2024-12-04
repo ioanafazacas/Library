@@ -72,12 +72,14 @@ public class BookRepositoryMySQL implements BookRepository{
 
     @Override
     public boolean save(Book book) {
-       String  newSql= "INSERT INTO book VALUES(null, ?,?,?);";
+       String  newSql= "INSERT INTO book VALUES(null, ?,?,?,?,?);";
        try{
            PreparedStatement statement = connection.prepareStatement(newSql);
            statement.setString(1, book.getAutor());
            statement.setString(2,book.getTitle());
            statement.setDate(3, Date.valueOf(book.getPublichedDate()));
+           statement.setInt(4,book.getQuantity());
+           statement.setFloat(5,book.getPrice());
            statement.executeUpdate();
        }catch (SQLException e){
            e.printStackTrace();

@@ -38,12 +38,16 @@ public class BookController {
         public void handle(ActionEvent actionEvent) {
             String title= bookView.getTitle();
             String author= bookView.getAuthor();
+            int quantity= bookView.getQuantity();
+            float price= bookView.getPrice();
 
-            if(title.isEmpty() || author.isEmpty()){
+            if(title.isEmpty() || author.isEmpty() || quantity==0 || price==0.0){
                 bookView.addDisplayAlertMessage("Save error","Problem at Author or Title fields", "Can not have an empty title or auther fild");
 
             }else{
-                BookDTO bookDTO= new BookDTOBuilder().setTitle(title).setAuthor(author).build();
+                BookDTO bookDTO= new BookDTOBuilder().setTitle(title)
+                        .setAuthor(author).setQuantity(quantity)
+                        .setPrice(price).build();
                 boolean saveBook= bookService.save(BookMapper.convertBookDTOToBook(bookDTO));
 
                 if(saveBook){
@@ -86,12 +90,16 @@ public class BookController {
         public void handle(ActionEvent actionEvent) {
             String title= bookView.getTitle();
             String author= bookView.getAuthor();
+            int quantity= bookView.getQuantity();
+            float price= bookView.getPrice();
 
             if(title.isEmpty() || author.isEmpty()){//mai trebuie sa adaug verificarea pentru campul de cantitate
                 bookView.addDisplayAlertMessage("Save error","Problem at Author or Title  fields", "Can not have an empty title or auther  fild");
 
             }else{
-                BookDTO bookDTO= new BookDTOBuilder().setTitle(title).setAuthor(author).build();
+                BookDTO bookDTO= new BookDTOBuilder().setTitle(title)
+                        .setAuthor(author).setQuantity(quantity)
+                        .setPrice(price).build();
                 OrderDTO orderDTO= new OrderDTOBuilder().setTitle(title).setAuthor(author).build();
                 boolean saveOrder= orderService.save(user, BookMapper.convertBookDTOToBook(bookDTO));
 

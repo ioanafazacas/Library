@@ -15,6 +15,14 @@ public class BookDTOBuilder {
         bookDTO.setTitle(title);
         return this;
     }
+    public BookDTOBuilder setQuantity(int quantity){
+        bookDTO.setQuantity(quantity);
+        return this;
+    }
+    public BookDTOBuilder setPrice(float price){
+        bookDTO.setPrice(price);
+        return this;
+    }
     public BookDTO build(){
         return bookDTO;
     }

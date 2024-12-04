@@ -16,7 +16,10 @@ public class BookMapper {
     public static Book convertBookDTOToBook(BookDTO bookDTO){
         return new BookBuilder().setTitle(bookDTO.getTitle())
                 .setAuthor(bookDTO.getAuthor())
-                .setPublishedDate(LocalDate.of(2010,1,1)).build();
+                .setPublishedDate(LocalDate.of(2010,1,1))
+                .setQuantity(bookDTO.getQuantity())
+                .setPrice(bookDTO.getPrice())
+                .build();
     }
     public static List<BookDTO> converBookListToBookDTOList(List<Book> books){
         return books.parallelStream().map(BookMapper::convertBookToBookDTO).collect(Collectors.toList());
