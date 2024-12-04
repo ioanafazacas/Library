@@ -23,6 +23,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    public Book findByTitleAndAuthor(String title, String auther) {
+        return bookRepository.findByTitleAndAuthor(title,auther).orElseThrow(() ->new IllegalArgumentException("Book with title %s and auther %s was not found ".formatted(title,auther)));
+    }
+
+    @Override
     public boolean save(Book book) {
         return bookRepository.save(book);
     }

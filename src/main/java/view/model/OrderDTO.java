@@ -2,6 +2,8 @@ package view.model;
 
 import javafx.beans.property.*;
 
+import java.sql.Timestamp;
+
 public class OrderDTO {
     private StringProperty author;
     public void setAuthor(String author){
@@ -31,20 +33,6 @@ public class OrderDTO {
         return title;
     }
 
-    private IntegerProperty quantity;
-    public void setQuantity(int quantity){
-        quantityProperty().set(quantity);
-    }
-    public int getQuantity(){
-        return (int)quantityProperty().get();
-    }
-    public IntegerProperty quantityProperty(){
-        if(quantity == null){
-            quantity= new SimpleIntegerProperty(this, "quantity");
-        }
-        return quantity;
-    }
-
     private FloatProperty price;
     public void setPrice(float price){
         priceProperty().set(price);
@@ -57,5 +45,19 @@ public class OrderDTO {
             price= new SimpleFloatProperty(this, "price");
         }
         return price;
+    }
+
+    private StringProperty saleDate;
+    public void setSaleDate(Timestamp saleDate){
+        saleDateProperty().set(String.valueOf(saleDate));
+    }
+    public Timestamp getSaleDate(){
+        return Timestamp.valueOf(saleDateProperty().get());
+    }
+    public StringProperty saleDateProperty(){
+        if(saleDate == null){
+            saleDate= new SimpleStringProperty(this, "saleDate");
+        }
+        return saleDate;
     }
 }

@@ -24,6 +24,7 @@ public class BookView {
     private Label titleLabel;
     private Button saveButton;
     private Button deleteButton;
+    private Button buyButton;
     public BookView(Stage primaryStage, List<BookDTO> books){
         primaryStage.setTitle("Library");
 
@@ -77,12 +78,17 @@ public class BookView {
 
         deleteButton= new Button("Delete");
         gridPane.add(deleteButton,5,2);
+        buyButton = new Button("Buy");
+        gridPane.add(buyButton,5,3);
     }
     public void addSaveButtonListener(EventHandler<ActionEvent> saveButtonListener){
         saveButton.setOnAction(saveButtonListener);
     }
     public void addDeleteButtonListener(EventHandler<ActionEvent> deleteButtonListener){
         deleteButton.setOnAction(deleteButtonListener);
+    }
+    public void addBuyButtonListener(EventHandler<ActionEvent> buyButtonListener){
+        buyButton.setOnAction(buyButtonListener);
     }
     //mesaje pop-up
     public void addDisplayAlertMessage(String title, String header, String content){

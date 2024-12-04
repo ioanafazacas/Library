@@ -27,6 +27,11 @@ public class BookRepositoryMock implements BookRepository{
     }
 
     @Override
+    public Optional<Book> findByTitleAndAuthor(String title, String auther) {
+        return Optional.empty();
+    }
+
+    @Override
     public boolean save(Book book) {
         return books.add(book);
     }

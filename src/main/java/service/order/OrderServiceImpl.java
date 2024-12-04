@@ -1,7 +1,9 @@
-package service;
+package service.order;
 
+import model.Book;
 import model.Order;
-import repository.OrderRepository;
+import model.User;
+import repository.order.OrderRepository;
 
 import java.util.List;
 
@@ -23,8 +25,8 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public boolean save(Order order) {
-        return orderRepository.save(order);
+    public boolean save(User user, Book book) {
+        return orderRepository.save(user,book);
     }
 
     //ar trebui implementat o metoda sell sau asta ii deja metoda save modificata

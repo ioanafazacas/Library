@@ -5,22 +5,14 @@ import controller.LoginController;
 import database.JDBConnectionWrapper;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import launcher.LoginComponentFactory;
+import launcher.OrderFactory;
 import model.builder.BookBuilder;
-import model.builder.OrderBuilder;
-import database.DatabaseConnectionFactory;
 import model.Book;
-import model.validator.UserValidator;
-import repository.*;
-import repository.book.BookRepository;
-import repository.book.BookRepositoryCacheDecorator;
-import repository.book.BookRepositoryMySQL;
-import repository.book.Cache;
 import repository.security.RightsRolesRepository;
 import repository.security.RightsRolesRepositoryMySQL;
 import repository.user.UserRepository;
 import repository.user.UserRepositoryMySQL;
-import service.OrderService;
-import service.OrderServiceImpl;
 import service.user.AuthentificationService;
 import service.user.AuthentificationServiceImpl;
 import view.LoginView;
@@ -100,6 +92,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        /*
         final Connection connection = new JDBConnectionWrapper(PRODUCTION).getConnection();
 
         final RightsRolesRepository rightsRolesRepository = new RightsRolesRepositoryMySQL(connection);
@@ -110,5 +103,9 @@ public class Main extends Application {
         final LoginView loginView = new LoginView(primaryStage);
 
         new LoginController(loginView, authentificationService);
+    */
+        LoginComponentFactory componentFactory = LoginComponentFactory.getInstance(false, primaryStage);
+        //OrderFactory.getInstance(false,primaryStage);
     }
+
 }

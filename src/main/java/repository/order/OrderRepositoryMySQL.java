@@ -1,10 +1,15 @@
-package repository;
+package repository.order;
 
+import model.Book;
+import model.User;
 import model.builder.OrderBuilder;
 
 import model.Order;
+import repository.book.BookRepository;
+import repository.book.BookRepositoryMySQL;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -53,16 +58,18 @@ public class OrderRepositoryMySQL implements OrderRepository{
     }
 
     @Override
-    public boolean save(Order order) {
-        String  newSql= "INSERT INTO book_order VALUES(null, ?,?,?,?,?);";
+    public boolean save( User user, Book book) {
+        String  newSql= "INSERT INTO book_order VALUES(null,?,?,?,?,?,?);";
         try{
             PreparedStatement statement = connection.prepareStatement(newSql);
-            statement.setString(1, order.getAuthor());
-            statement.setString(2,order.getTitle());
-            statement.setDate(3, Date.valueOf(order.getSaleDate()));
-            statement.setInt(4,order.getQuantity());
-            statement.setFloat(5,order.getPrice());
+            statement.setLong(1,book.getId());
+            statement.setString(2, book.getTitle());
+            statement.setString(3, book.getAutor());
+            statement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            statement.setLong(5,user.getId());
+            statement.setFloat(6,book.getPrice());
             statement.executeUpdate();
+            //trebuie decrementat stocul sa nu uitam, o functie de sale implementata in BookRepository
         }catch (SQLException e){
             e.printStackTrace();
             return false;
@@ -75,10 +82,11 @@ public class OrderRepositoryMySQL implements OrderRepository{
     private Order getOrderFromResultSet (ResultSet resultSet) throws SQLException {
         return new OrderBuilder()
                 .setId(resultSet.getLong("id"))
+                .setBookId(resultSet.getLong("user_id"))
                 .setTitle(resultSet.getString("title"))
                 .setAuthor(resultSet.getString("author"))
-                .setSaleDate(new java.sql.Date(resultSet.getDate("saleDate").getTime()).toLocalDate())
-                .setQuantity(resultSet.getInt("quantity"))
+                .setSaleDate(resultSet.getTimestamp("saleDate"))
+                .setUserId(resultSet.getLong("user_id"))
                 .setprice(resultSet.getFloat("price"))
                 .build();
     }

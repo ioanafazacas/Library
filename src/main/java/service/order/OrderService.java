@@ -1,12 +1,14 @@
-package service;
+package service.order;
 
 
+import model.Book;
 import model.Order;
+import model.User;
 
 import java.util.List;
 
 public interface OrderService {
     List<Order> findAll();
     Order findById(Long id);
-    boolean save(Order order);
+    boolean save(User user, Book book);
 }

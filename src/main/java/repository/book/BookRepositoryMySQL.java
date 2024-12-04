@@ -52,6 +52,25 @@ public class BookRepositoryMySQL implements BookRepository{
     }
 
     @Override
+    public Optional<Book> findByTitleAndAuthor(String title, String auther) {
+        String  sql = "SELECT * FROM book WHERE title=? and auther=?";
+        Optional<Book> book = Optional.empty();
+        try{
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,title);
+            statement.setString(2,auther);
+            ResultSet resultSet= statement.executeQuery();
+
+            if(resultSet.next()){
+                book = Optional.of(getBookFromResultSet(resultSet));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return book;
+    }
+
+    @Override
     public boolean save(Book book) {
        String  newSql= "INSERT INTO book VALUES(null, ?,?,?);";
        try{

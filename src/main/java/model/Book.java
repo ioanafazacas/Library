@@ -8,6 +8,8 @@ public class Book {//trebuie facute modificari , adaugate campurile quantity si 
     private String title;
     private String autor;
     private LocalDate publichedDate;
+    private int quantity;
+    private float price;
 
 
     public Long getId() {
@@ -41,10 +43,29 @@ public class Book {//trebuie facute modificari , adaugate campurile quantity si 
     public void setPublichedDate(LocalDate publichedDate) {
         this.publichedDate = publichedDate;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
     @Override
     public String toString(){
         return "Book id: " + id + " Title: " +
                 title + " Author: " + autor +
-                " publish date: " + publichedDate;
+                " publish date: " + publichedDate +
+                " price: " + price +
+                " quantity: " + quantity;
     }
 }

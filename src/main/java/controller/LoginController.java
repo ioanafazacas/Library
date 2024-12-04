@@ -36,7 +36,7 @@ public class LoginController {
                 loginView.setActionTargetText(loginNotification.getFormattedErrors());
             }else{
                 loginView.setActionTargetText("LogIn Successfull!");
-                EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), loginNotification.getResult());
             }
         }
     }

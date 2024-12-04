@@ -7,11 +7,11 @@ import javafx.stage.Stage;
 
 import mapper.OrderMapper;
 
-import repository.OrderRepository;
-import repository.OrderRepositoryMySQL;
+import repository.order.OrderRepository;
+import repository.order.OrderRepositoryMySQL;
 
-import service.OrderService;
-import service.OrderServiceImpl;
+import service.order.OrderService;
+import service.order.OrderServiceImpl;
 
 import view.OrderView;
 

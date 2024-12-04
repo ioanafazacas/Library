@@ -41,10 +41,11 @@ public class JDBConnectionWrapper {
 
         String sql2 = "CREATE TABLE IF NOT EXISTS book_order("+
                 " id bigint NOT NULL AUTO_INCREMENT,"+
+                " book_id bigint DEFAULT NULL," +
                 " author VARCHAR(500) NOT NULL,"+
                 " title VARCHAR(500) NOT NULL," +
                 " saleDate datetime DEFAULT NULL,"+
-                " quantity int DEFAULT 0,"+
+                " user_id bigint DEFAULT NULL,"+
                 " price float DEFAULT 0,"+
                 " PRIMARY KEY(id), "+
                 " UNIQUE KEY id_UNIQUE(id)"+

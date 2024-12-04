@@ -3,6 +3,8 @@ package view.model.builder;
 
 import view.model.OrderDTO;
 
+import java.sql.Timestamp;
+
 public class OrderDTOBuilder {
     private OrderDTO orderDTO;
     public OrderDTOBuilder(){
@@ -16,8 +18,8 @@ public class OrderDTOBuilder {
         orderDTO.setTitle(title);
         return this;
     }
-    public OrderDTOBuilder setQuantity(int quantity){
-        orderDTO.setQuantity(quantity);
+    public OrderDTOBuilder setSaleDate(Timestamp saleDate){
+        orderDTO.setSaleDate(saleDate);
         return this;
     }
     public OrderDTO build(){

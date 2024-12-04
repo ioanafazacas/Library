@@ -1,7 +1,9 @@
-package repository;
+package repository.order;
 
 
+import model.Book;
 import model.Order;
+import model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +29,8 @@ public class OrderRepositoryMock implements OrderRepository{
     }
 
     @Override
-    public boolean save(Order order) {
-        return orders.add(order);
+    public boolean save(User user, Book book) {
+        return true;
     }
 
 }
