@@ -59,9 +59,9 @@ public class BookView {
         TableColumn<BookDTO, String> authorColumn = new TableColumn<BookDTO, String>("Author");
         authorColumn.setCellValueFactory(new PropertyValueFactory<>("author"));
         TableColumn<BookDTO, String> priceColumn = new TableColumn<BookDTO, String>("Price");
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         TableColumn<BookDTO, String> quantityColumn = new TableColumn<BookDTO, String>("Quantity");
-        authorColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        quantityColumn.setCellValueFactory(new PropertyValueFactory<>("quantity"));
 
         bookTableView.getColumns().addAll(titleColumn,authorColumn,priceColumn,quantityColumn);
 

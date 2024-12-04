@@ -120,6 +120,8 @@ public class BookRepositoryMySQL implements BookRepository{
                .setTitle(resultSet.getString("title"))
                .setAuthor(resultSet.getString("author"))
                .setPublishedDate(new java.sql.Date(resultSet.getDate("publishedDate").getTime()).toLocalDate())
+               .setQuantity(resultSet.getInt("quantity"))
+               .setPrice(resultSet.getFloat("price"))
                .build();
     }
 }

@@ -11,7 +11,10 @@ import java.util.stream.Collectors;
 
 public class BookMapper {
     public static BookDTO convertBookToBookDTO(Book book){
-        return new BookDTOBuilder().setTitle(book.getTitle()).setAuthor(book.getAutor()).build();
+        return new BookDTOBuilder().setTitle(book.getTitle()).setAuthor(book.getAutor())
+                .setQuantity(book.getQuantity())
+                .setPrice(book.getPrice())
+                .build();
     }
     public static Book convertBookDTOToBook(BookDTO bookDTO){
         return new BookBuilder().setTitle(bookDTO.getTitle())
