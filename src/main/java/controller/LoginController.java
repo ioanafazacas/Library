@@ -8,7 +8,6 @@ import launcher.LoginComponentFactory;
 import model.User;
 import model.validator.Notification;
 import model.validator.UserValidator;
-//import service.user.AuthenticationService;
 import view.LoginView;
 import java.util.EventListener;
 import java.util.List;
@@ -16,14 +15,6 @@ public class LoginController {
     private final LoginView loginView;
     private final AuthentificationService authenticationService;
 
-/*
-    public LoginController(LoginView loginView, AuthentificationService authenticationService) {
-        this.loginView = loginView;
-        this.authenticationService = authenticationService;
-
-        this.loginView.addLoginButtonListener(new LoginButtonListener());
-        this.loginView.addRegisterButtonListener(new RegisterButtonListener());
-    }*/
     public LoginController(LoginView loginView, AuthentificationService authentificationService) {
         this.loginView=loginView;
         this.authenticationService=authentificationService;
@@ -45,7 +36,7 @@ public class LoginController {
                 loginView.setActionTargetText(loginNotification.getFormattedErrors());
             }else{
                 loginView.setActionTargetText("LogIn Successfull!");
-                //EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
+                EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage());
             }
         }
     }

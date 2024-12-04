@@ -33,7 +33,7 @@ public class AuthentificationServiceImpl implements AuthentificationService{
 
         User user = new UserBuilder()
                 .setUsername(username)
-                .setPassword(encodedPassword)
+                .setPassword(password)
                 .setRoles(Collections.singletonList(customerRole))
                 .build();
 
