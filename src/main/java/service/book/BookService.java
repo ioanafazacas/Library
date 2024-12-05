@@ -9,6 +9,7 @@ public interface BookService {
     Book findById(Long id);
     Book findByTitleAndAuthor(String title, String auther);
     boolean save(Book book);
+    boolean updateQuantity(Book book);
     boolean delete(Book book);
     int getAgeOfBook(Long id);
 

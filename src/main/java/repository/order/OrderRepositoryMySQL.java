@@ -63,8 +63,8 @@ public class OrderRepositoryMySQL implements OrderRepository{
         try{
             PreparedStatement statement = connection.prepareStatement(newSql);
             statement.setLong(1,book.getId());
-            statement.setString(2, book.getTitle());
-            statement.setString(3, book.getAutor());
+            statement.setString(3, book.getTitle());
+            statement.setString(2, book.getAutor());
             statement.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
             statement.setLong(5,user.getId());
             statement.setFloat(6,book.getPrice());

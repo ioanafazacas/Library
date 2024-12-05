@@ -33,6 +33,11 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
+    public boolean updateQuantity(Book book) {
+        return bookRepository.updateQuantity(book);
+    }
+
+    @Override
     public boolean delete(Book book) {
         return bookRepository.delete(book);
     }

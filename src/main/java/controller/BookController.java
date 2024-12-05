@@ -101,8 +101,18 @@ public class BookController {
                         .setAuthor(author).setQuantity(quantity)
                         .setPrice(price).build();
                 OrderDTO orderDTO= new OrderDTOBuilder().setTitle(title).setAuthor(author).build();
-                boolean saveOrder= orderService.save(user, BookMapper.convertBookDTOToBook(bookDTO));
 
+                boolean saveOrder;
+                if(bookService.findByTitleAndAuthor(title,author).getQuantity()-1<0){
+                    saveOrder=false;
+                    bookView.addDisplayAlertMessage("Sale error","Problem at adding Order", "The book is not available. Out of stock.");
+                }
+                else{
+                    saveOrder= orderService.save(user, bookService.findByTitleAndAuthor(title,author));
+                    bookDTO.setQuantity(bookService.findByTitleAndAuthor(title,author).getQuantity()-1);
+                    bookView.updateSellBookFromObservableList(bookDTO);
+                    bookService.updateQuantity(bookService.findByTitleAndAuthor(title,author));
+                }
                 if(saveOrder){
                     bookView.addDisplayAlertMessage("Sale Successful","Order added", "Order was successfully added to database");
                     //orderView.addOrderToObeservableList(orderDTO);

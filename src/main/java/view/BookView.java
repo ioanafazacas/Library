@@ -135,6 +135,15 @@ public class BookView {
     public void removeBookFromObservableList(BookDTO bookDTO){
         this.booksObservableList.remove(bookDTO);
     }
+    public void updateSellBookFromObservableList(BookDTO newBookDTO){
+        for(int i = 0; i < booksObservableList.size(); i++){
+            BookDTO bookDTO = booksObservableList.get(i);
+            if(bookDTO.getTitle().equals(newBookDTO.getTitle()) && bookDTO.getAuthor().equals(newBookDTO.getAuthor())){
+                booksObservableList.set(i,newBookDTO);
+            }
+        }
+    }
+
     public TableView getBookTableView(){
         return bookTableView;
     }

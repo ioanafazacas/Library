@@ -52,13 +52,13 @@ public class BookRepositoryMySQL implements BookRepository{
     }
 
     @Override
-    public Optional<Book> findByTitleAndAuthor(String title, String auther) {
-        String  sql = "SELECT * FROM book WHERE title=? and auther=?";
+    public Optional<Book> findByTitleAndAuthor(String title, String author) {
+        String  sql = "SELECT * FROM book WHERE title=? and author=?";
         Optional<Book> book = Optional.empty();
         try{
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1,title);
-            statement.setString(2,auther);
+            statement.setString(2,author);
             ResultSet resultSet= statement.executeQuery();
 
             if(resultSet.next()){
@@ -88,6 +88,24 @@ public class BookRepositoryMySQL implements BookRepository{
 
        return true;
     }
+
+    @Override
+    public boolean updateQuantity(Book book) {
+        String  newSql= "UPDATE book SET quantity = ? WHERE title=? and author=?;";
+        try{
+            PreparedStatement statement = connection.prepareStatement(newSql);
+            statement.setInt(1, book.getQuantity()-1);
+            statement.setString(2,book.getTitle());
+            statement.setString(3, book.getAutor());
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+    }
+
 
     @Override
     public boolean delete(Book book) {
