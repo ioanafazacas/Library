@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import mapper.BookMapper;
 import mapper.OrderMapper;
+import model.Book;
 import model.User;
 import repository.order.OrderRepositoryMySQL;
 import service.book.BookService;
@@ -88,18 +89,26 @@ public class BookController {
 
         @Override
         public void handle(ActionEvent actionEvent) {
+            BookDTO bookDTO= (BookDTO) bookView.getBookTableView().getSelectionModel().getSelectedItem();
+            Book book = BookMapper.convertBookDTOToBook(bookDTO);
+            String title= book.getTitle();
+            String author= book.getAutor();
+            int quantity= book.getQuantity();
+            float price= book.getPrice();
+            /*
             String title= bookView.getTitle();
             String author= bookView.getAuthor();
             int quantity= bookView.getQuantity();
             float price= bookView.getPrice();
-
-            if(title.isEmpty() || author.isEmpty()){//mai trebuie sa adaug verificarea pentru campul de cantitate
+            */
+            if(bookDTO == null){//mai trebuie sa adaug verificarea pentru campul de cantitate
                 bookView.addDisplayAlertMessage("Save error","Problem at Author or Title  fields", "Can not have an empty title or auther  fild");
 
-            }else{
+            }else{/*
                 BookDTO bookDTO= new BookDTOBuilder().setTitle(title)
                         .setAuthor(author).setQuantity(quantity)
                         .setPrice(price).build();
+                        */
                 OrderDTO orderDTO= new OrderDTOBuilder().setTitle(title).setAuthor(author).build();
 
                 boolean saveOrder;
