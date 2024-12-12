@@ -5,8 +5,6 @@ import model.User;
 import model.builder.OrderBuilder;
 
 import model.Order;
-import repository.book.BookRepository;
-import repository.book.BookRepositoryMySQL;
 
 import java.sql.*;
 import java.time.LocalDateTime;
@@ -76,6 +74,29 @@ public class OrderRepositoryMySQL implements OrderRepository{
         }
 
         return true;
+    }
+
+    @Override
+    public List<Integer> generateReport(int id) {
+        List<Integer> ids= new ArrayList<>();
+        String  newSql= "SELECT book_id FROM book_order WHERE user_id = ? AND YEAR(saleDate) = YEAR(CURDATE()) AND MONTH(saleDate) = MONTH(CURDATE());";
+        try{
+            PreparedStatement statement = connection.prepareStatement(newSql);
+            statement.setInt(1,id);
+            statement.executeUpdate();
+
+            ResultSet resultSet= statement.executeQuery();
+
+            while(resultSet.next()){
+                ids.add(resultSet.getInt("book_id"));
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+
+        return ids;
     }
 
 

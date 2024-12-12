@@ -29,6 +29,11 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.save(user,book);
     }
 
+    @Override
+    public List<Integer> generateReport(int id) {
+        return orderRepository.generateReport(id);
+    }
+
     //ar trebui implementat o metoda sell sau asta ii deja metoda save modificata
 
 }
