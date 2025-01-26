@@ -30,15 +30,15 @@ public class BookRepositoryMySQLTest {
         assertTrue(book.isEmpty());
     }
     public void save(Book book){
-        assertTrue(bookRepository.save(new BookBuilder().setTitle("Poezii").setAuthor("Tudor Arghezii")
+        assertTrue(bookRepository.save(new BookBuilder().setTitle("Poezii").setUsername("Tudor Arghezii")
                 .setPublishedDate(LocalDate.of(1920,8,8)).build()));
     }
     public void delete(Book book){
-        assertFalse(bookRepository.delete(new BookBuilder().setTitle("Poezii").setAuthor("George Bacovia")
+        assertFalse(bookRepository.delete(new BookBuilder().setTitle("Poezii").setUsername("George Bacovia")
                 .setPublishedDate(LocalDate.of(1920,8,8)).build()));
     }
     public void removeAll(){
-        bookRepository.save(new BookBuilder().setTitle("Luceafarul").setAuthor("Mihai Eminescu")
+        bookRepository.save(new BookBuilder().setTitle("Luceafarul").setUsername("Mihai Eminescu")
                 .setPublishedDate(LocalDate.of(1888,8,8)).build());
         bookRepository.removeAll();
         List<Book> books= bookRepository.findAll();

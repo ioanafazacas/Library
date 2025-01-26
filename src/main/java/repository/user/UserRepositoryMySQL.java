@@ -1,4 +1,5 @@
 package repository.user;
+import model.Book;
 import model.User;
 import model.builder.UserBuilder;
 //import model.validator.Notification;
@@ -10,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import static database.Constants.Tables.USER;
@@ -27,7 +29,26 @@ public class UserRepositoryMySQL implements UserRepository {
 
     @Override
     public List<User> findAll() {
-        return null;
+        String sql = "SELECT * FROM user;";
+
+        List<User> users= new ArrayList<>();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                users.add( new UserBuilder()
+                        .setId(resultSet.getLong("id"))
+                        .setUsername(resultSet.getString("username"))
+                        .setPassword(resultSet.getString("password"))
+                        .setRoles(rightsRolesRepository.findRolesForUser(resultSet.getLong("id")))
+                        .build());
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return users;
     }
 
     // SQL Injection Attacks should not work after fixing functions
@@ -117,5 +138,6 @@ public class UserRepositoryMySQL implements UserRepository {
             return false;
         }
     }
+
 
 }

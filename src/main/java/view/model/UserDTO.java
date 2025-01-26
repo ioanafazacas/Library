@@ -7,6 +7,7 @@ import javafx.beans.property.StringProperty;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class UserDTO {
@@ -42,7 +43,7 @@ public class UserDTO {
     public void setRole(List<String> role){
         for(int i=0; i< role.size(); i++)
         {
-            roleProperty().set(i,role.get(i));
+            roleProperty().set(i,new SimpleStringProperty(role.get(i)));
         }
     }
     public List<String> getRole(){
@@ -53,7 +54,7 @@ public class UserDTO {
     }
     public List<StringProperty> roleProperty(){
         if(role == null){
-            role = new List<StringProperty>(this, "roles");
+            role = Collections.singletonList(new SimpleStringProperty(this, "roles"));
         }
         return role;
     }

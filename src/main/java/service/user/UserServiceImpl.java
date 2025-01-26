@@ -4,6 +4,7 @@ import model.Book;
 import model.User;
 import model.builder.BookBuilder;
 import model.builder.UserBuilder;
+import repository.user.UserRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,13 +14,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService{
-    private final Connection connection;
-    public UserServiceImpl(Connection connection){
-        this.connection=connection;
+    private final UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository){
+        this.userRepository=userRepository;
     }
     @Override
     public List<User> findAll() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override

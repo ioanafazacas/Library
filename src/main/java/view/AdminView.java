@@ -27,7 +27,7 @@ public class AdminView {
     private Label usernameLabel;
     private Label passwordLabel;
     private Label rolLable;
-    private ComboBox<Role> roleComboBox;
+    private ComboBox<String> roleComboBox;
     private final String[] rolList;
     private Button addButton;
     private Button reportButton;
@@ -43,8 +43,9 @@ public class AdminView {
         Scene scene= new Scene(gridPane, 720, 480);
         primaryStage.setScene(scene);
 
-        userObservableList = FXCollections.observableArrayList(users);
-        iniTableView(gridPane);
+        userObservableList = null;
+        //userObservableList = FXCollections.observableArrayList(users);
+        //iniTableView(gridPane);
 
         initSaveOptions(gridPane);
         primaryStage.show();
@@ -77,12 +78,12 @@ public class AdminView {
         userTableView = new TableView<UserDTO>();
         userTableView.setPlaceholder(new Label("No users to display"));
 
-        TableColumn<UserDTO,String> idColumn = new TableColumn<>("Id");
-        idColumn.setCellFactory(new PropertyValueFactory<>("id"));
-        TableColumn<UserDTO,String> usernameColumn = new TableColumn<>("Username");
-        usernameColumn.setCellFactory(new PropertyValueFactory<>("username"));
-        TableColumn<UserDTO,String> rolColumn = new TableColumn<>("Rol");
-        rolColumn.setCellFactory(new PropertyValueFactory<>("roles"));
+        TableColumn<UserDTO,String> idColumn = new TableColumn<UserDTO,String>("Id");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        TableColumn<UserDTO,String> usernameColumn = new TableColumn<UserDTO,String>("Username");
+        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+        TableColumn<UserDTO,String> rolColumn = new TableColumn<UserDTO,String>("Rol");
+        rolColumn.setCellValueFactory(new PropertyValueFactory<>("roles"));
 
         userTableView.getColumns().addAll(idColumn,usernameColumn,rolColumn);
 
@@ -121,7 +122,7 @@ public class AdminView {
         return passwordTextField.getText();
     }
     public String getRol(){
-        Role selectedRole = roleComboBox.getValue();
+        String selectedRole = roleComboBox.getValue();
         return selectedRole != null ? selectedRole.toString() : null;
     }
     public TableView getAdminTableView(){

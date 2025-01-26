@@ -39,7 +39,7 @@ public class Main extends Application {
         BookRepository bookRepository = new BookRepositoryMock();
 
         bookRepository.save(book);
-        bookRepository.save(new BookBuilder().setAuthor("Ioan Creanga").setTitle("Harap Alb").setPublishedDate(LocalDate.of(1880,10,11)).build());
+        bookRepository.save(new BookBuilder().setUsername("Ioan Creanga").setTitle("Harap Alb").setPublishedDate(LocalDate.of(1880,10,11)).build());
         System.out.println(bookRepository.findAll());
         bookRepository.removeAll();
         System.out.println(bookRepository.findAll());
@@ -52,7 +52,7 @@ public class Main extends Application {
 
         bookService.save(book);
         System.out.println(bookService.findAll());
-        Book bookHarapAlb= new BookBuilder().setAuthor("Ioan Creanga").setTitle("Harap Alb").setPublishedDate(LocalDate.of(1880,10,11)).build();
+        Book bookHarapAlb= new BookBuilder().setUsername("Ioan Creanga").setTitle("Harap Alb").setPublishedDate(LocalDate.of(1880,10,11)).build();
         bookService.save(bookHarapAlb);
         System.out.println(bookService.findAll());
         bookService.delete(bookHarapAlb);
@@ -66,7 +66,7 @@ public class Main extends Application {
         OrderService orderService= new OrderServiceImpl(orderRepository);
 
         System.out.println(orderService.findAll());
-        orderService.save(new OrderBuilder().setTitle("George Bacovia").setTitle("Plumb").setprice(20).setQuantity(2).build());
+        orderService.save(new OrderBuilder().setTitle("George Bacovia").setTitle("Plumb").setprice(20).setId(2).build());
         System.out.println(orderService.findAll());
 
         Connection connection = DatabaseConnectionFactory.getConnectionWrapper(true).getConnection();

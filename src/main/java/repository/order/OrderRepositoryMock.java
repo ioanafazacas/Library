@@ -6,6 +6,7 @@ import model.Order;
 import model.User;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,11 @@ public class OrderRepositoryMock implements OrderRepository{
     @Override
     public boolean save(User user, Book book) {
         return true;
+    }
+
+    @Override
+    public List<Integer> generateReport(int id) {
+        return Collections.singletonList(0);
     }
 
 }

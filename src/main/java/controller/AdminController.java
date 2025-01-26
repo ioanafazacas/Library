@@ -12,6 +12,7 @@ import service.user.AuthentificationService;
 import service.user.UserService;
 import view.AdminView;
 import view.model.UserDTO;
+import view.model.builder.UserDTOBuilder;
 
 import java.util.List;
 
@@ -21,14 +22,14 @@ public class AdminController {
     private final AuthentificationService authentificationService;
     private final OrderService orderService;
     private final BookService bookService;
-    private final User user;
-    public AdminController(AdminView adminView, UserService userService,AuthentificationService authentificationService, OrderService orderService,BookService bookService, User user){
+
+    public AdminController(AdminView adminView, UserService userService,AuthentificationService authentificationService, OrderService orderService,BookService bookService){
         this.adminView = adminView;
         this.userService = userService;
         this.authentificationService=authentificationService;
         this.orderService= orderService;
         this.bookService=bookService;
-        this.user = user;
+
 
         this.adminView.addSaveButtonListener(new AdminController.saveButtonListener());
         this.adminView.addReportButtonListener(new AdminController.reportButtonListener());
@@ -45,11 +46,12 @@ public class AdminController {
                 adminView.addDisplayAlertMessage("Save error","Problem at Username or Password fields", "Can not have an empty username or password fild");
 
             }else{
-                UserDTO userDTO= new UserDTOBuilder()
+                UserDTO userDTO= new UserDTOBuilder().setUsername(username)
+                        .setRole(rol)
                         .build();
                 Notification<Boolean> addUser= authentificationService.register(username,password);
 
-                if(addUser){
+                if(!addUser.hasErrors()){
                     adminView.addDisplayAlertMessage("Save Successful","User added", "User was successfully added to database");
                     adminView.addUserToObeservableList(userDTO);
 
@@ -68,8 +70,8 @@ public class AdminController {
             float incasari=0;
             UserDTO userDTO = (UserDTO) adminView.getAdminTableView().getSelectionModel().getSelectedItem();
             List<Integer> book_ids = orderService.generateReport(userDTO.getId());
-            for(id : book_ids){
-                Book book = bookService.findById(id);
+            for(Integer id : book_ids){
+                Book book = bookService.findById(Long.valueOf(id));
                 nr_carti++;
                 incasari= incasari + book.getPrice();
             }

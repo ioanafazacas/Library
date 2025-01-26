@@ -97,8 +97,8 @@ public class BookController {
             float price= book.getPrice();
             /*
             String title= bookView.getTitle();
-            String author= bookView.getAuthor();
-            int quantity= bookView.getQuantity();
+            String author= bookView.getUsername();
+            int quantity= bookView.getId();
             float price= bookView.getPrice();
             */
             if(bookDTO == null){//mai trebuie sa adaug verificarea pentru campul de cantitate
@@ -106,7 +106,7 @@ public class BookController {
 
             }else{/*
                 BookDTO bookDTO= new BookDTOBuilder().setTitle(title)
-                        .setAuthor(author).setQuantity(quantity)
+                        .setUsername(author).setId(quantity)
                         .setPrice(price).build();
                         */
                 OrderDTO orderDTO= new OrderDTOBuilder().setTitle(title).setAuthor(author).build();

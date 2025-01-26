@@ -30,6 +30,6 @@ public class BookRepositoryMockTest {
     }
     @Test
     public void save(){
-        assertTrue(bookRepository.save(new BookBuilder().setTitle("Poezii").setAuthor("Tudor Arghezii").setPublishedDate(LocalDate.of(1920,8,8)).build()));
+        assertTrue(bookRepository.save(new BookBuilder().setTitle("Poezii").setUsername("Tudor Arghezii").setPublishedDate(LocalDate.of(1920,8,8)).build()));
     }*/
 }

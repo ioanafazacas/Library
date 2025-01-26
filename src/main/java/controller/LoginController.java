@@ -1,5 +1,8 @@
 package controller;
 
+import database.Constants;
+import launcher.AdminComponentFactory;
+import model.Role;
 import service.user.AuthentificationService;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,7 +39,15 @@ public class LoginController {
                 loginView.setActionTargetText(loginNotification.getFormattedErrors());
             }else{
                 loginView.setActionTargetText("LogIn Successfull!");
-                EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), loginNotification.getResult());
+                User user = loginNotification.getResult();
+                //filter(rol -> rol.getRole().equals(Constants.Roles.ADMINISTRATOR)).findFirst());
+                //contains(Constants.Roles.ADMINISTRATOR))//probabil e problema ca compar un string cu un obiect Role
+                if(user.getRoles().stream().anyMatch(rol -> rol.getRole().equals(Constants.Roles.ADMINISTRATOR)))
+                {
+                    AdminComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(),LoginComponentFactory.getStage());
+                }else{
+                    EmployeeComponentFactory.getInstance(LoginComponentFactory.getComponentsForTests(), LoginComponentFactory.getStage(), user);
+                }
             }
         }
     }
