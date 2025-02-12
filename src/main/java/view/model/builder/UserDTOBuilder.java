@@ -1,8 +1,10 @@
 package view.model.builder;
 
+import model.Role;
 import view.model.UserDTO;
 
 import java.util.Collections;
+import java.util.List;
 
 public class UserDTOBuilder {
     private UserDTO userDTO;
@@ -17,8 +19,8 @@ public class UserDTOBuilder {
         userDTO.setUsername(username);
         return this;
     }
-    public UserDTOBuilder setRole(String role){
-        userDTO.setRole(Collections.singletonList(role));
+    public UserDTOBuilder setRole(List<Role> role){
+        userDTO.setRole(role);
         return this;
     }
     public UserDTO build(){

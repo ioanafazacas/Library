@@ -14,6 +14,9 @@ import model.validator.UserValidator;
 import view.LoginView;
 import java.util.EventListener;
 import java.util.List;
+
+import static database.Constants.Roles.CUSTOMER;
+
 public class LoginController {
     private final LoginView loginView;
     private final AuthentificationService authenticationService;
@@ -59,7 +62,7 @@ public class LoginController {
             String username = loginView.getUsername();
             String password = loginView.getPassword();
 
-            Notification<Boolean> registerNotification = authenticationService.register(username, password);
+            Notification<Boolean> registerNotification = authenticationService.register(username, password, CUSTOMER);
 
             if (registerNotification.hasErrors()) {
                 loginView.setActionTargetText(registerNotification.getFormattedErrors());

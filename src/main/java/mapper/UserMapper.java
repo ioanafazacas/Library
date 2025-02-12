@@ -15,7 +15,7 @@ public class UserMapper {
     public static UserDTO convertUserToUserDTO(User user){
         return new UserDTOBuilder().setId(Math.toIntExact(user.getId()))
                 .setUsername(user.getUsername())
-                .setRole(user.getRoles().toString())
+                .setRole(user.getRoles())
                 .build();
     }
     public static User convertUserDTOToUser(UserDTO userDTO){

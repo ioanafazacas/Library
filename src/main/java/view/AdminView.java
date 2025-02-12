@@ -43,9 +43,9 @@ public class AdminView {
         Scene scene= new Scene(gridPane, 720, 480);
         primaryStage.setScene(scene);
 
-        userObservableList = null;
-        //userObservableList = FXCollections.observableArrayList(users);
-        //iniTableView(gridPane);
+        //userObservableList = null;
+        userObservableList = FXCollections.observableArrayList(users);
+        iniTableView(gridPane);
 
         initSaveOptions(gridPane);
         primaryStage.show();

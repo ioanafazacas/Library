@@ -25,9 +25,9 @@ public class AuthentificationServiceImpl implements AuthentificationService{
     }
 
     @Override
-    public Notification<Boolean> register(String username, String password) {
+    public Notification<Boolean> register(String username, String password, String rolName) {
 
-        Role customerRole = rightsRolesRepository.findRoleByTitle(CUSTOMER);
+        Role customerRole = rightsRolesRepository.findRoleByTitle(rolName);
 
         String encodedPassword = hashPassword(password);
 

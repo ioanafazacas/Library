@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import model.Role;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,23 +40,21 @@ public class UserDTO {
         return id;
     }
 
-    private List<StringProperty> role;
-    public void setRole(List<String> role){
-        for(int i=0; i< role.size(); i++)
-        {
-            roleProperty().set(i,new SimpleStringProperty(role.get(i)));
+    private StringProperty roles;
+    public void setRole(List<Role> roles){
+        StringBuilder sb= new StringBuilder();
+        for(Role role: roles){
+            sb.append(role.getRole()).append(" , ");
         }
+        rolesProperty().set(sb.toString());
     }
-    public List<String> getRole(){
-        List<String> roles= new ArrayList<>();
-        for(int i=0; i<roleProperty().size(); i++)
-            roles.add(String.valueOf(roleProperty().get(i)));
+    public String getRole(){
+        return rolesProperty().get();
+    }
+    public StringProperty rolesProperty(){
+        if(roles == null){
+            roles = new SimpleStringProperty(this, "role");
+        }
         return roles;
-    }
-    public List<StringProperty> roleProperty(){
-        if(role == null){
-            role = Collections.singletonList(new SimpleStringProperty(this, "roles"));
-        }
-        return role;
     }
 }
