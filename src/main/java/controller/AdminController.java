@@ -2,6 +2,7 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import mapper.UserMapper;
 import model.Book;
 import model.Report;
 import model.Role;
@@ -51,9 +52,9 @@ public class AdminController {
                 Notification<Boolean> addUser= authentificationService.register(username,password,rol);
 
                 if(!addUser.hasErrors()){
-                    //implementeaza find by username ca sa atribui rolul si id angajatului dupa ce a fost salvat in DB
-                    UserDTO userDTO= new UserDTOBuilder().setUsername(username)
-                            .build();
+                    //gasirea user-ului nou adaugat in baza de date pentru a putea fi adaugat in timp real in tabelul de angajati
+                    User user = authentificationService.login(username,password).getResult();
+                    UserDTO userDTO= UserMapper.convertUserToUserDTO(user);
 
                     adminView.addDisplayAlertMessage("Save Successful","User added", "User was successfully added to database");
                     adminView.addUserToObeservableList(userDTO);
