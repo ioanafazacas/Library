@@ -1,12 +1,10 @@
 package controller;
 
+import com.itextpdf.text.DocumentException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import mapper.UserMapper;
-import model.Book;
-import model.Report;
-import model.Role;
-import model.User;
+import model.*;
 import model.validator.Notification;
 import service.book.BookService;
 import service.order.OrderService;
@@ -16,6 +14,7 @@ import view.AdminView;
 import view.model.UserDTO;
 import view.model.builder.UserDTOBuilder;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,9 +77,18 @@ public class AdminController {
                 Book book = bookService.findById(Long.valueOf(id));
                 nr_carti++;
                 incasari= incasari + book.getPrice();
+                System.out.println(book.getTitle()+"  "+ book.getPrice()+ "--- "+ nr_carti+ " "+ incasari);
             }
             Report report= new Report(userDTO.getUsername(),nr_carti,incasari);
             //asta trebuie trimis undeva ca sa fie generat un pdf
+            PdfGenerator pdf = new PdfGenerator();
+            try {
+                pdf.generateReportPdf(report);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (DocumentException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 }

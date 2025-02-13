@@ -83,7 +83,7 @@ public class OrderRepositoryMySQL implements OrderRepository{
         try{
             PreparedStatement statement = connection.prepareStatement(newSql);
             statement.setInt(1,id);
-            statement.executeUpdate();
+            statement.executeQuery();
 
             ResultSet resultSet= statement.executeQuery();
 
