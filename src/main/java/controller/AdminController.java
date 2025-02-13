@@ -11,10 +11,12 @@ import service.order.OrderService;
 import service.user.AuthentificationService;
 import service.user.UserService;
 import view.AdminView;
+import view.PDFView;
 import view.model.UserDTO;
 import view.model.builder.UserDTOBuilder;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +91,14 @@ public class AdminController {
             } catch (DocumentException e) {
                 throw new RuntimeException(e);
             }
+
+            // Deschidem fereastra cu raportul
+            try {
+                new PDFView();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
 }
